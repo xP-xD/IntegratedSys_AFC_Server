@@ -1,6 +1,6 @@
 package valueObject;
 
-public class VLogIn {
+public class VLogIn implements IValueObject {
 
 	private String id;
 	private String password;

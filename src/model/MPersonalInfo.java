@@ -20,7 +20,7 @@ public class MPersonalInfo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void write(VPersonalInfo vPersonalInfo) {
+	public String write(VPersonalInfo vPersonalInfo) {
 		try {
 
 			File file = new File("dataFile/temp");
@@ -55,11 +55,10 @@ public class MPersonalInfo {
 				printWriter.println(vPersonalInfo.getPassword());
 				printWriter.println(vPersonalInfo.getName());
 
-				System.out.println("회원 가입이 완료 되었습니다. 감사합니다.");
 				fileWriter.close();
-			} else {
-				System.out.println("아이디가 중복됩니다. 다른 아이디를 사용해주세요.");
-			}
+				
+				return "회원 가입이 완료 되었습니다. 감사합니다.";
+			} 
 			// fileWriter로 개행해주는 명령어를 입력해서 하는 방법도 있음
 //			fileWriter.write(vPersonalInfo.getId()+"\r\n");
 //			fileWriter.write(vPersonalInfo.getPassword()+"\r\n");
@@ -69,7 +68,7 @@ public class MPersonalInfo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		return "아이디가 중복됩니다. 다른 아이디를 사용해주세요.";
 	}
 
 	public VPersonalInfo read(String id) {

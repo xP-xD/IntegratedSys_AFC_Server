@@ -1,7 +1,7 @@
 package valueObject;
 
 //Value object
-public class VPersonalInfo {
+public class VPersonalInfo implements IValueObject {
 
 	private String id;
 	private String password;

@@ -1,14 +1,20 @@
 package service;
+import java.util.ArrayList;
+
 import model.MPersonalInfo;
 import valueObject.VPersonalInfo;
 
-public class SPersonalInfo {
+public class SPersonalInfo implements IService {
+	
+	ArrayList<String> sendList;
 
-	public void SPersonalInfo() {
+	public SPersonalInfo() {
+		sendList = new ArrayList<String>();
 	}
 
-	public void write(VPersonalInfo vPersonalInfo) {
+	public ArrayList<String> write(VPersonalInfo vPersonalInfo) {
 		MPersonalInfo mPersonalInfo = new MPersonalInfo();
-		mPersonalInfo.write(vPersonalInfo);
+		sendList.add(mPersonalInfo.write(vPersonalInfo));
+		return sendList;
 	}
 }
