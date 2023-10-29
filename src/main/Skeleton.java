@@ -11,11 +11,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import service.IService;
+import service.SLecture;
 import service.SLogIn;
+import service.SMajor;
 import service.SPersonalInfo;
+import service.SPreApplicationForClasses;
+import service.SRealApplicationForClasses;
 import valueObject.IValueObject;
+import valueObject.VLecture;
 import valueObject.VLogIn;
+import valueObject.VMajor;
 import valueObject.VPersonalInfo;
+import valueObject.VPreApplicationForClasses;
+import valueObject.VRealApplicationForClasses;
 
 public class Skeleton {
 
@@ -28,9 +36,18 @@ public class Skeleton {
 
 		this.objectMap.put("sPersonalInfo", new SPersonalInfo());
 		this.objectMap.put("sLogIn", new SLogIn());
+		this.objectMap.put("sMajor", new SMajor());
+		this.objectMap.put("sLecture", new SLecture());
+		this.objectMap.put("sPreApplicationForClasses", new SPreApplicationForClasses());
+		this.objectMap.put("sRealApplicationForClasses", new SRealApplicationForClasses());
 
 		this.objectMap.put("vPersonalInfo", new VPersonalInfo());
 		this.objectMap.put("vLogIn", new VLogIn());
+		this.objectMap.put("vMajor", new VMajor());
+		this.objectMap.put("vLecture", new VLecture());
+		this.objectMap.put("vPreApplicationForClasses", new VPreApplicationForClasses());
+		this.objectMap.put("vRealApplicationForClasses", new VRealApplicationForClasses());
+		
 	}
 	
 	// 클라이언트로 부터 요청 받은 정보를 보내기
@@ -94,6 +111,7 @@ public class Skeleton {
 					} else if (object instanceof IService) {
 						objectInfoList.clear();
 						objectInfoList = (ArrayList<String>) object.getClass().getMethod(methodName, valueObject.getClass()).invoke(object, valueObject);
+						break;
 					} 
 				}
 
