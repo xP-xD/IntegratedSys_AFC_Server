@@ -23,7 +23,7 @@ public class MPersonalInfo {
 	public String write(VPersonalInfo vPersonalInfo) {
 		try {
 
-			File file = new File("dataFile/temp");
+			File file = new File("user/userData");
 			Scanner scanner = new Scanner(file);
 
 			VPersonalInfo validateRepetition = new VPersonalInfo();
@@ -31,7 +31,7 @@ public class MPersonalInfo {
 
 			String readLine = null;
 			int nameCount = 0;
-			Path path = Paths.get("dataFile/temp");
+			Path path = Paths.get("user/userData");
 			List<String> allLines;
 			allLines = Files.readAllLines(path);
 			while (!vPersonalInfo.getId().equals(readLine) && allLines.size() > nameCount) {
@@ -73,7 +73,7 @@ public class MPersonalInfo {
 
 	public VPersonalInfo read(String id) {
 		try {
-			File file = new File("dataFile/temp");
+			File file = new File("user/userData");
 			Scanner scanner = new Scanner(file);
 
 			VPersonalInfo vPersonalInfo = new VPersonalInfo();
@@ -81,7 +81,7 @@ public class MPersonalInfo {
 			try {
 				String readLine = null;
 				int nameCount = 0;
-				Path path = Paths.get("dataFile/temp");
+				Path path = Paths.get("user/userData");
 				List<String> allLines;
 				allLines = Files.readAllLines(path);
 
@@ -116,19 +116,5 @@ public class MPersonalInfo {
 		return null;
 
 	}
-
-//	public void read() {
-//		try {
-//			File file = new File("temp");
-//			FileReader fileReader = new FileReader(file);
-//			
-//			fileReader.read();
-//			
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
 
 }

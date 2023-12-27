@@ -1,16 +1,16 @@
 package service;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 import model.MLecture;
 import valueObject.VLecture;
 
-public class SLecture implements IService {
+public class SLecture  {
 
-	public ArrayList<String> getData(VLecture vLecture) {
+	public Vector<VLecture> getData(String fileName) {
 		
 		MLecture mLecture = new MLecture();
-		return mLecture.getData(vLecture.getFileName());
+		return mLecture.getData(fileName);
 		
 	}
 	

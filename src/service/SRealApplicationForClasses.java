@@ -1,30 +1,34 @@
 package service;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 import model.MRealApplicationForClasses;
+import valueObject.VLecture;
 import valueObject.VRealApplicationForClasses;
 
-public class SRealApplicationForClasses implements IService {
+public class SRealApplicationForClasses  {
 	
-	ArrayList<String> sendList;
-
 	public SRealApplicationForClasses() {
-		sendList = new ArrayList<String>();
 	}
 
-	public ArrayList<String> getData(VRealApplicationForClasses vRealApplicationForClasses) {
-		sendList.clear();
+	public Vector<VRealApplicationForClasses> getData(String id) {
+
 		MRealApplicationForClasses mRealApplicationForClasses = new MRealApplicationForClasses();
-		return mRealApplicationForClasses.getData(vRealApplicationForClasses.getUserId());
+		return mRealApplicationForClasses.getData(id);
 	}
 
-	public ArrayList<String> store(VRealApplicationForClasses vRealApplicationForClasses) {
-		sendList.clear();
+	public void store(String id, VLecture vLecture) {
+
 		MRealApplicationForClasses mRealApplicationForClasses = new MRealApplicationForClasses();
-		sendList.add(mRealApplicationForClasses.store(vRealApplicationForClasses));
-		return sendList;
-		
+		mRealApplicationForClasses.store(id, vLecture);
+
+	}
+	
+	public void store(String id, Vector<String> vLectures) {
+
+		MRealApplicationForClasses mRealApplicationForClasses = new MRealApplicationForClasses();
+		mRealApplicationForClasses.store(id, vLectures);
+
 	}
 
 }

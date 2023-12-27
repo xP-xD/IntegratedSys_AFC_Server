@@ -1,15 +1,15 @@
 package service;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 import model.MMajor;
 import valueObject.VMajor;
 
-public class SMajor implements IService{
-public ArrayList<String> getData(VMajor vMajor) {
+public class SMajor {
+public Vector<VMajor> getData(String fileName) {
 		
 		MMajor mMajor = new MMajor();
-		return mMajor.getData(vMajor.getFileName());
+		return mMajor.getData(fileName);
 		
 	}
 

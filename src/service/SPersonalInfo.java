@@ -1,20 +1,17 @@
 package service;
-import java.util.ArrayList;
+import java.rmi.RemoteException;
 
 import model.MPersonalInfo;
 import valueObject.VPersonalInfo;
 
-public class SPersonalInfo implements IService {
+public class SPersonalInfo {
 	
-	ArrayList<String> sendList;
-
-	public SPersonalInfo() {
-		sendList = new ArrayList<String>();
+	public SPersonalInfo() throws RemoteException {
+		super();
 	}
 
-	public ArrayList<String> write(VPersonalInfo vPersonalInfo) {
+	public String write(VPersonalInfo vPersonalInfo) {
 		MPersonalInfo mPersonalInfo = new MPersonalInfo();
-		sendList.add(mPersonalInfo.write(vPersonalInfo));
-		return sendList;
+		return mPersonalInfo.write(vPersonalInfo);
 	}
 }

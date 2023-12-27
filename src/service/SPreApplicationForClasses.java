@@ -1,29 +1,32 @@
 package service;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 import model.MPreApplicationForClasses;
+import valueObject.VLecture;
 import valueObject.VPreApplicationForClasses;
 
-public class SPreApplicationForClasses implements IService {
-	
-	ArrayList<String> sendList;
+public class SPreApplicationForClasses {
 
 	public SPreApplicationForClasses() {
-		sendList = new ArrayList<String>();
 	}
 
-	public ArrayList<String> getData(VPreApplicationForClasses vPreApplicationForClasses) {
-		sendList.clear();
+	public Vector<VPreApplicationForClasses> getData(String id) {
+
 		MPreApplicationForClasses mPreApplicationForClasses = new MPreApplicationForClasses();
-		return mPreApplicationForClasses.getData(vPreApplicationForClasses.getUserId());
+		return mPreApplicationForClasses.getData(id);
 	}
 
-	public ArrayList<String> store(VPreApplicationForClasses vPreApplicationForClasses) {
-		sendList.clear();
+	public void store(String id, VLecture vLecture) {
+
 		MPreApplicationForClasses mPreApplicationForClasses = new MPreApplicationForClasses();
-		sendList.add(mPreApplicationForClasses.store(vPreApplicationForClasses));
-		return sendList;
+		mPreApplicationForClasses.store(id, vLecture);
+
+	}
+
+	public void store(String id, Vector<String> lectures) {
+		MPreApplicationForClasses mPreApplicationForClasses = new MPreApplicationForClasses();
+		mPreApplicationForClasses.store(id, lectures);
 		
 	}
 

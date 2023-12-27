@@ -1,14 +1,29 @@
 package main;
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+
+import service.Skeleton;
+
 public class SMain {
-		
+
 	Skeleton skeleton;
-	
+
 	public SMain() {
-		this.skeleton =  new Skeleton();
+		try {
+			this.skeleton =  new Skeleton();
+			LocateRegistry.createRegistry(1099);
+	        Naming.rebind("RemoteService", skeleton);
+		} catch (RemoteException | MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void run() {
-		this.skeleton.process();
+		 System.out.println("서버가 실행중입니다.");
 	}
 
 	public static void main(String[] args) {

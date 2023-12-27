@@ -6,31 +6,36 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.Vector;
 
+import valueObject.VLecture;
 import valueObject.VPreApplicationForClasses;
 
 public class MPreApplicationForClasses {
 
-	public ArrayList<String> getData(String id) {
+	public Vector<VPreApplicationForClasses> getData(String id) {
 
-		ArrayList<String> vPreApplicationForClassesList = null;
+		Vector<VPreApplicationForClasses> vPreApplicationForClasses = null;
 
 		try {
-			File file = new File("dataFile/preStore");
+			File file = new File("user/temporaryLectureStorage");
 			Scanner scanner = new Scanner(file);
-			vPreApplicationForClassesList = new ArrayList<String>();
+			vPreApplicationForClasses = new Vector<VPreApplicationForClasses>();
 
 			while (scanner.hasNext()) {
-
 				if (scanner.next().equals(id)) {
-					
-//					vPreApplicationForClassesList.add(scanner.next());
-					vPreApplicationForClassesList.add(scanner.next());
-					vPreApplicationForClassesList.add(scanner.next());
-					vPreApplicationForClassesList.add(scanner.next());
-					vPreApplicationForClassesList.add(scanner.next());
-					vPreApplicationForClassesList.add(scanner.next());
+					VPreApplicationForClasses vPreApplicationForClass = new VPreApplicationForClasses();
+//					vPreApplicationForClass.setUserId(scanner.next());
+					vPreApplicationForClass.setLectureId(scanner.next());
+					vPreApplicationForClass.setLecture(scanner.next());
+					vPreApplicationForClass.setProfessor(scanner.next());
+					vPreApplicationForClass.setCredit(scanner.next());
+					vPreApplicationForClass.setTime(scanner.next());
+
+					vPreApplicationForClasses.add(vPreApplicationForClass);
 				}
 			}
 
@@ -41,29 +46,32 @@ public class MPreApplicationForClasses {
 			e.printStackTrace();
 		}
 
-			return vPreApplicationForClassesList;
+		return vPreApplicationForClasses;
 
 	}
 
-	public String store(VPreApplicationForClasses vPreApplicationForClasses) {
+	public void store(String id, VLecture vLecture) {
 
 		try {
-			File file = new File("dataFile/preStore");
+			File file = new File("user/temporaryLectureStorage");
+			
+			
 			FileWriter fileWriter = new FileWriter(file, true);
 			PrintWriter printWriter = new PrintWriter(fileWriter);
 
+			
 			// ID ID 과목명 교수명 학점 시간
-			printWriter.print(vPreApplicationForClasses.getUserId());
+			printWriter.print(id);
 			printWriter.print(" ");
-			printWriter.print(vPreApplicationForClasses.getLectureId());
+			printWriter.print(vLecture.getId());
 			printWriter.print(" ");
-			printWriter.print(vPreApplicationForClasses.getLecture());
+			printWriter.print(vLecture.getLecture());
 			printWriter.print(" ");
-			printWriter.print(vPreApplicationForClasses.getProfessor());
+			printWriter.print(vLecture.getProfessor());
 			printWriter.print(" ");
-			printWriter.print(vPreApplicationForClasses.getCredit());
+			printWriter.print(vLecture.getCredit());
 			printWriter.print(" ");
-			printWriter.println(vPreApplicationForClasses.getTime());
+			printWriter.println(vLecture.getTime());
 			// 일렬로 쫙 써서 저장해놓고 가져올때는 아이디 맞는거로 해서 뒤에 저장돼있는 과목들 불러오는거로 하는데 일단 한 줄로 저장하면 그거 하고
 			// 한줄 개행
 
@@ -73,7 +81,52 @@ public class MPreApplicationForClasses {
 			e.printStackTrace();
 		}
 
-		return "미리담기가 완료 되었습니다.";
+	}
+
+	public void store(String id, Vector<String> lectures) {
+		try {
+			File file = new File("user/temporaryLectureStorage");
+			
+			Vector<String> fileDataVector = new Vector<String>();
+			Scanner scanner = new Scanner(file);
+			while (scanner.hasNextLine()) {
+				fileDataVector.add(scanner.nextLine());
+			}
+
+			ArrayList<Integer> removeList = new ArrayList<Integer>();
+			for (int i = 0; i < fileDataVector.size(); i++) {
+				if (Arrays.asList(fileDataVector.get(i).toString().split(" ")).get(0).equals(id)) {
+					removeList.add(i);
+				}
+			}
+			removeList.sort(Collections.reverseOrder());
+			for (int i = 0; i < removeList.size(); i++) {
+				int index = removeList.get(i);
+				fileDataVector.remove(index);
+			}
+
+			if (!lectures.isEmpty()) {
+				for (String lecture : lectures) {
+					String temp = id + " "+ lecture;
+					fileDataVector.add(temp);
+				}
+			}
+			
+			FileWriter fileWriter = new FileWriter(file);
+			fileWriter = new FileWriter(file,true);
+			PrintWriter printWriter = new PrintWriter(fileWriter);
+			
+			for(String fileData:fileDataVector) {
+				printWriter.println(fileData);
+			}
+
+			scanner.close();
+
+			fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,7 +1,10 @@
 package valueObject;
 
-public class VLogIn implements IValueObject {
+import java.io.Serializable;
 
+public class VLogIn implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String password;
 	
